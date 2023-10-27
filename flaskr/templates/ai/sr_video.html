@@ -1,0 +1,85 @@
+{% extends 'ai/base.html' %}
+{% block title %}视频超分{% endblock %}
+
+{% block my_link_script %}
+{% endblock %}
+
+
+{% block my %}
+<div class="d-flex mb-4 mt-6"><span class="fa-stack me-2 ms-n1"><svg class="svg-inline--fa fa-circle fa-w-16 fa-stack-2x text-300" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><!-- <i class="fas fa-circle fa-stack-2x text-300"></i> Font Awesome fontawesome.com --><svg class="svg-inline--fa fa-exclamation-circle fa-w-16 fa-inverse fa-stack-1x text-primary" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path></svg><!-- <i class="fa-inverse fa-stack-1x text-primary fas fa-exclamation-circle"></i> Font Awesome fontawesome.com --></span>
+  <div class="col">
+    <h5 class="mb-0 text-primary position-relative"><span class="bg-200 dark__bg-1100 pe-3">Errors</span><span class="border position-absolute top-50 translate-middle-y w-100 start-0 z-n1"></span></h5>
+    <p class="mb-0">Display your error pages with awesome cards.</p>
+  </div>
+</div>
+
+<div class="row g-0">
+  <div class="col-lg-6 pe-lg-2 mb-3 mb-lg-0">
+      <div class="card text-center h-100">
+        <div class="card-body p-4 p-sm-5">
+          <div class="fw-black lh-1 text-300 fs-error">404</div>
+          <p class="lead mt-4 text-800 font-sans-serif fw-semi-bold w-md-75 w-xl-100 mx-auto">The page you're looking for is not found.</p>
+          <hr>
+          <p>Make sure the address is correct and that the page hasn't moved. If you think this is a mistake, <a href="mailto:info@exmaple.com">contact us</a>.</p><a class="btn btn-primary btn-sm mt-3" href="index.html"><svg class="svg-inline--fa fa-home fa-w-18 me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg><!-- <span class="fas fa-home me-2"></span> Font Awesome fontawesome.com -->Take me home</a>
+        </div>
+      </div>
+    </div>
+  <div class="col-lg-6 ps-lg-2">
+      <div class="card text-center h-100">
+        <div class="card-body p-4 p-sm-5">
+          <div class="fw-black lh-1 text-300 fs-error">500</div>
+          <p class="lead mt-4 text-800 font-sans-serif fw-semi-bold">Whoops, something went wrong!</p>
+          <hr>
+          <p>Try refreshing the page, or going back and attempting the action again. If this problem persists, <a href="mailto:info@exmaple.com">contact us</a>.</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="card mb-3">
+    <div class="example-aspect-rarios">
+        <div class="ratio ratio-1x1">
+            <div>1x1</div>
+        </div>
+    </div>
+
+    <div class="card-header">
+      <div class="row flex-between-end">
+        <div class="col-auto align-self-center">
+          <h5 class="mb-0" data-anchor="data-anchor" id="example">Example<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#example" style="padding-left: 0.375em;"></a></h5>
+        </div>
+        <div class="col-auto ms-auto">
+          <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
+            <button class="btn btn-sm active" data-bs-toggle="pill" data-bs-target="#dom-ae578fe0-a0cc-482b-8b2c-1fee4caee5f3" type="button" role="tab" aria-controls="dom-ae578fe0-a0cc-482b-8b2c-1fee4caee5f3" aria-selected="true" id="tab-dom-ae578fe0-a0cc-482b-8b2c-1fee4caee5f3">Preview</button>
+            <button class="btn btn-sm" data-bs-toggle="pill" data-bs-target="#dom-5e0c6eb1-cde7-4cc9-8b7d-7e66621183dc" type="button" role="tab" aria-controls="dom-5e0c6eb1-cde7-4cc9-8b7d-7e66621183dc" aria-selected="false" id="tab-dom-5e0c6eb1-cde7-4cc9-8b7d-7e66621183dc" tabindex="-1">Code</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body bg-body-tertiary">
+      <div class="tab-content">
+        <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-ae578fe0-a0cc-482b-8b2c-1fee4caee5f3" id="dom-ae578fe0-a0cc-482b-8b2c-1fee4caee5f3">
+          <div class="ratio ratio-16x9">
+
+            <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen="allowfullscreen" title="YouTube video"></iframe>
+
+          </div>
+        </div>
+        <div class="tab-pane code-tab-pane" role="tabpanel" aria-labelledby="tab-dom-5e0c6eb1-cde7-4cc9-8b7d-7e66621183dc" id="dom-5e0c6eb1-cde7-4cc9-8b7d-7e66621183dc">
+          <pre class="scrollbar rounded-1 language-html" style="max-height:420px" tabindex="0"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ratio ratio-16x9<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.youtube.com/embed/zpOULjyy-n8?rel=0<span class="token punctuation">"</span></span> <span class="token attr-name">allowfullscreen</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>allowfullscreen<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>YouTube video<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

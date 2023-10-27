@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cropper</title>
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.11/dist/cropper.css">
+</head>
+<body>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput" accept="image/*">
+        <img id="image" src="" alt="" width="500">
+        <input type="hidden" name="x" id="cropX">
+        <input type="hidden" name="y" id="cropY">
+        <input type="hidden" name="width" id="cropWidth">
+        <input type="hidden" name="height" id="cropHeight">
+        <button type="submit">裁剪上传</button>
+    </form>
+    <hr>
+    {% if cropped_image %}
+    <img src="{{ url_for('uploaded_file', filename=cropped_image.split('/')[-1]) }}" alt="Cropped Image">
+    {% endif %}
+
+    <script src="https://unpkg.com/cropperjs@1.5.11/dist/cropper.js"></script>
+    <script>
+        const image = document.getElementById('image');
+        const fileInput = document.getElementById('fileInput');
+        let cropper;
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                image.src = e.target.result;
+                if (cropper) cropper.destroy(); // Destroy previous cropper instance
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    crop(event) {
+                        document.getElementById('cropX').value = event.detail.x;
+                        document.getElementById('cropY').value = event.detail.y;
+                        document.getElementById('cropWidth').value = event.detail.width;
+                        document.getElementById('cropHeight').value = event.detail.height;
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{% extends 'ai/base.html' %}
+{% block title %}图像超分{% endblock %}
+
+{% block my_link_script %}
+<link href="{{ url_for('static', filename='vendors/dropzone/dropzone.min.css') }}" rel="stylesheet" />
+<script src="{{ url_for('static', filename='vendors/dropzone/dropzone.min.js') }}"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.11/dist/cropper.css">
+<script src="https://unpkg.com/cropperjs@1.5.11/dist/cropper.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const image = document.getElementById('image');
+    const fileInput = document.getElementById('fileInput');
+    let cropper;
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            image.src = e.target.result;
+            if (cropper) cropper.destroy(); // Destroy previous cropper instance
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                crop(event) {
+                    document.getElementById('cropX').value = event.detail.x;
+                    document.getElementById('cropY').value = event.detail.y;
+                    document.getElementById('cropWidth').value = event.detail.width;
+                    document.getElementById('cropHeight').value = event.detail.height;
+                }
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+});
+
+  </script>
+{% endblock %}
+
+
+{% block my %}
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="row flex-between-end">
+      <div class="col-auto align-self-center">
+        <h5 class="mb-0" data-anchor="data-anchor" id="single-file-upload">Single File Upload<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#single-file-upload" style="padding-left: 0.375em;"></a></h5>
+        <p class="mb-0 pt-1 mt-2 mb-0"><code>Dropzone </code>requires a valid server-side url for the file upload. You can easily pass it through <code>data-options </code>attribute like <code>data-options!={ url: 'valid/url'}</code></p>
+      </div>
+      <div class="col-auto ms-auto">
+        <div class="nav nav-pills nav-pills-falcon flex-grow-1 mt-2" role="tablist">
+          <button class="btn btn-sm active" data-bs-toggle="pill" data-bs-target="#dom-6f19fa30-a695-4de3-8b9f-6d2233661a5c" type="button" role="tab" aria-controls="dom-6f19fa30-a695-4de3-8b9f-6d2233661a5c" aria-selected="true" id="tab-dom-6f19fa30-a695-4de3-8b9f-6d2233661a5c">Preview</button>
+          <button class="btn btn-sm" data-bs-toggle="pill" data-bs-target="#dom-1ada0a78-2125-4801-8f89-b5580f43c65b" type="button" role="tab" aria-controls="dom-1ada0a78-2125-4801-8f89-b5580f43c65b" aria-selected="false" id="tab-dom-1ada0a78-2125-4801-8f89-b5580f43c65b" tabindex="-1">Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body bg-body-tertiary">
+    <form action={{url_for('ai.sr_image')}} method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput" accept="image/*">
+        <img id="image" src="" alt="" width="500">
+        <input type="hidden" name="x" id="cropX">
+        <input type="hidden" name="y" id="cropY">
+        <input type="hidden" name="width" id="cropWidth">
+        <input type="hidden" name="height" id="cropHeight">
+        <button type="submit">裁剪上传</button>
+    </form>
+    <hr>
+
+    {% if cropped_image %}
+    <h3>Original Image:</h3>
+    <img src="{{ url_for('ai.uploaded_file', filename='original_image.jpg') }}" alt="Original Image">
+    <h3>Cropped Image:</h3>
+    <img src="{{ url_for('ai.uploaded_file', filename='cropped_image.jpg') }}" alt="Cropped Image">
+    {% endif %}
+  </div>
+</div>
+
+
+
+{% endblock %}
