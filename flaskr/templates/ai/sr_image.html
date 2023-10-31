@@ -21,14 +21,14 @@
             image.src = e.target.result;
             if (cropper) cropper.destroy(); // Destroy previous cropper instance
             cropper = new Cropper(image, {
-                aspectRatio: 1,
-                crop(event) {
-                    document.getElementById('cropX').value = event.detail.x;
-                    document.getElementById('cropY').value = event.detail.y;
-                    document.getElementById('cropWidth').value = event.detail.width;
-                    document.getElementById('cropHeight').value = event.detail.height;
-                }
-            });
+              aspectRatio: NaN, // 将此行修改为NaN
+              crop(event) {
+                  document.getElementById('cropX').value = event.detail.x;
+                  document.getElementById('cropY').value = event.detail.y;
+                  document.getElementById('cropWidth').value = event.detail.width;
+                  document.getElementById('cropHeight').value = event.detail.height;
+              }
+          });
         };
         reader.readAsDataURL(file);
     });
@@ -56,13 +56,22 @@
   </div>
   <div class="card-body bg-body-tertiary">
     <form action={{url_for('ai.sr_image')}} method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="fileInput" accept="image/*">
-        <img id="image" src="" alt="" width="500">
-        <input type="hidden" name="x" id="cropX">
-        <input type="hidden" name="y" id="cropY">
-        <input type="hidden" name="width" id="cropWidth">
-        <input type="hidden" name="height" id="cropHeight">
-        <button type="submit">裁剪上传</button>
+      <h5>选择算法</h5>
+      <select class="btn btn-falcon-default dropdown-toggle" aria-label="Default select example" name="algo_option">
+        <option value="option1">Real_ESRGAN</option>
+        <option value="option2">SwinIR</option>
+        <option value="option3">HAT</option>
+      </select>
+      <p></p>
+      <h5>选择文件</h5>
+      <input type="file" name="file" id="fileInput" accept="image/*">
+      <img id="image" src="" alt="" width="500">
+      <input type="hidden" name="x" id="cropX">
+      <input type="hidden" name="y" id="cropY">
+      <input type="hidden" name="width" id="cropWidth">
+      <input type="hidden" name="height" id="cropHeight">
+      <p></p>
+      <button type="submit">裁剪上传</button>
     </form>
     <hr>
 
@@ -74,7 +83,6 @@
     {% endif %}
   </div>
 </div>
-
 
 
 {% endblock %}

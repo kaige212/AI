@@ -17,6 +17,9 @@ import os
 import io
 import base64
 from flask import send_file
+import mmcv
+import matplotlib.pyplot as plt
+from mmagic.apis import MMagicInferencer
 
 bp = Blueprint("ai", __name__, url_prefix="/ai")
 
@@ -26,13 +29,16 @@ def index():
     return render_template("ai/index.html")
 
 @bp.route("/sr_image", methods=['GET', 'POST'])
+@login_required
 def sr_image():
-    cropped_image = None
-
     if request.method == 'POST':
         file = request.files['file']
+        algo = request.form.get('algo_option')
+        user_folder = os.path.join(app.config['UPLOAD_FOLDER'], g.user['id'])
+        if not os.path.exists(user_folder):
+            os.makedirs(user_folder)
         # 保存原图
-        original_image_path = os.path.join(app.config['UPLOAD_FOLDER'], "original_image.jpg")
+        original_image_path = os.path.join(user_folder, "original_image.jpg")
         file.save(original_image_path)
 
         crop_data = request.form
@@ -43,10 +49,18 @@ def sr_image():
 
         image = Image.open(file)
         cropped_image = image.crop((x, y, x + w, y + h))
-        cropped_image_path = os.path.join(app.config['UPLOAD_FOLDER'], "cropped_image.jpg")
-        cropped_image.save(cropped_image_path)
 
-    return render_template("ai/sr_image.html", cropped_image=cropped_image_path if cropped_image else None)
+
+        cropped_image_path = os.path.join(user_folder, "cropped_image.jpg")
+        cropped_image.save(cropped_image_path)
+        '''
+        algo_dic={'Real_ESRGAN':'real_esrgan','SwinIR':'swinir','HAT':'HAT'}
+        model_ckpt = os.path.join('./tutorial/flaskr/static/model/sr_image',algo,'.pth')
+        editor = MMagicInferencer(model_name=algo_dic[algo], model_ckpt=model_ckpt)
+
+        results = editor.infer(img=os.path.join(image_save, cropped_image), result_out_dir=chaofen_image)
+        '''
+        return render_template("ai/sr_image.html", cropped_image=cropped_image_path if cropped_image else None,algo=algo)
 
 @bp.route('/uploads/<filename>')
 def uploaded_file(filename):
