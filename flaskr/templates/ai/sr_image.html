@@ -43,24 +43,23 @@
   <div class="card-header">
     <div class="row flex-between-end">
       <div class="col-auto align-self-center">
-        <h5 class="mb-0" data-anchor="data-anchor" id="single-file-upload">Single File Upload<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#single-file-upload" style="padding-left: 0.375em;"></a></h5>
-        <p class="mb-0 pt-1 mt-2 mb-0"><code>Dropzone </code>requires a valid server-side url for the file upload. You can easily pass it through <code>data-options </code>attribute like <code>data-options!={ url: 'valid/url'}</code></p>
+        <h5 class="mb-0" data-anchor="data-anchor" id="single-file-upload">图像超分<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#single-file-upload" style="padding-left: 0.375em;"></a></h5>
+        <p class="mb-0 pt-1 mt-2 mb-0"><code>* </code>1.你可以选择预定义的算法模型对图像超分</p>
+        <p class="mb-0 pt-1 mt-2 mb-0"><code>* </code>2.可以先裁剪图片或者不裁剪直接超分</p>
       </div>
-      <div class="col-auto ms-auto">
-        <div class="nav nav-pills nav-pills-falcon flex-grow-1 mt-2" role="tablist">
-          <button class="btn btn-sm active" data-bs-toggle="pill" data-bs-target="#dom-6f19fa30-a695-4de3-8b9f-6d2233661a5c" type="button" role="tab" aria-controls="dom-6f19fa30-a695-4de3-8b9f-6d2233661a5c" aria-selected="true" id="tab-dom-6f19fa30-a695-4de3-8b9f-6d2233661a5c">Preview</button>
-          <button class="btn btn-sm" data-bs-toggle="pill" data-bs-target="#dom-1ada0a78-2125-4801-8f89-b5580f43c65b" type="button" role="tab" aria-controls="dom-1ada0a78-2125-4801-8f89-b5580f43c65b" aria-selected="false" id="tab-dom-1ada0a78-2125-4801-8f89-b5580f43c65b" tabindex="-1">Code</button>
-        </div>
-      </div>
+
     </div>
   </div>
   <div class="card-body bg-body-tertiary">
     <form action={{url_for('ai.sr_image')}} method="post" enctype="multipart/form-data">
       <h5>选择算法</h5>
       <select class="btn btn-falcon-default dropdown-toggle" aria-label="Default select example" name="algo_option">
-        <option value="option1">Real_ESRGAN</option>
-        <option value="option2">SwinIR</option>
-        <option value="option3">HAT</option>
+        <option value="real_esrgan">real_esrgan</option>
+        <option value="real_esrgan_my">real_esrgan_my</option>
+        <option value="swinir">swinir</option>
+        <option value="liif">liif</option>
+        <option value="rdn">rdn</option>
+        <option value="esrgan">esrgan</option>
       </select>
       <p></p>
       <h5>选择文件</h5>
@@ -71,16 +70,21 @@
       <input type="hidden" name="width" id="cropWidth">
       <input type="hidden" name="height" id="cropHeight">
       <p></p>
-      <button type="submit">裁剪上传</button>
+      
+      <button type="submit" class="btn btn-outline-primary" name="action" value="crop_and_super_resolve">一键裁剪超分</button>
+      <button type="submit" class="btn btn-outline-primary" name="action" value="super_resolve">直接超分</button>
     </form>
     <hr>
 
-    {% if cropped_image %}
-    <h3>Original Image:</h3>
-    <img src="{{ url_for('ai.uploaded_file', filename='original_image.jpg') }}" alt="Original Image">
-    <h3>Cropped Image:</h3>
+    {% if display %}
+    <h3>原图:</h3>
+    <img src="{{ url_for('ai.uploaded_file', filename='origin_image.jpg') }}" alt="Origin Image">
+    <h3>裁剪:</h3>
     <img src="{{ url_for('ai.uploaded_file', filename='cropped_image.jpg') }}" alt="Cropped Image">
+    <h3>超分:</h3>
+    <img src="{{ url_for('ai.uploaded_file', filename='chaofen_image.jpg') }}" alt="Chaofen Image">
     {% endif %}
+
   </div>
 </div>
 
