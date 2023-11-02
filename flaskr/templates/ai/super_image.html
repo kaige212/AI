@@ -51,15 +51,16 @@
     </div>
   </div>
   <div class="card-body bg-body-tertiary">
-    <form action={{url_for('ai.sr_image')}} method="post" enctype="multipart/form-data">
+    <form action={{url_for('ai.super_image')}} method="post" enctype="multipart/form-data">
       <h5>选择算法</h5>
       <select class="btn btn-falcon-default dropdown-toggle" aria-label="Default select example" name="algo_option">
-        <option value="real_esrgan">real_esrgan</option>
-        <option value="real_esrgan_my">real_esrgan_my</option>
-        <option value="swinir">swinir</option>
-        <option value="liif">liif</option>
-        <option value="rdn">rdn</option>
-        <option value="esrgan">esrgan</option>
+        <option value="real_esrgan">Real_ESRGAN</option>
+        <option value="real_esrgan_zk">Real_ESRGAN_zk</option>
+        <option value="swinir">SwinIR</option>
+        <option value="swinir_xyh">SwinIR_xyh</option>
+        <option value="liif">LIIF</option>
+        <option value="rdn">RDN</option>
+        <option value="esrgan">ESRGAN</option>
       </select>
       <p></p>
       <h5>选择文件</h5>

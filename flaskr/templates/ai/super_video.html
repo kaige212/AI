@@ -1,0 +1,80 @@
+{% extends 'ai/base.html' %}
+{% block title %}视频超分{% endblock %}
+
+{% block my_link_script %}
+<link href="{{ url_for('static', filename='vendors/plyr/plyr.css') }}" rel="stylesheet" />
+<script src="{{ url_for('static', filename='vendors/plyr/plyr.polyfilled.min.js') }}"></script>
+{% endblock %}
+
+
+{% block my %}
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="row flex-between-end">
+      <div class="col-auto align-self-center">
+        <h5 class="mb-0" data-anchor="data-anchor" id="single-file-upload">视频超分<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#single-file-upload" style="padding-left: 0.375em;"></a></h5>
+        <p class="mb-0 pt-1 mt-2 mb-0"><code>* </code>选择算法，上传视频，超分后查看对比结果</p>
+        
+      </div>
+
+    </div>
+  </div>
+  <div class="card-body bg-body-tertiary">
+    <form action={{url_for('ai.super_video')}} method="post" enctype="multipart/form-data">
+      <h5>选择算法</h5>
+      <select class="btn btn-falcon-default dropdown-toggle" aria-label="Default select example" name="algo_option">
+        <option value="basicvsr_pp">BasicVSR++</option>
+        <option value="basicvsr">BasicVSR</option>
+      </select>
+      <p></p>
+      <h5>选择文件</h5>
+      
+      <input type="file" name="file" id="fileInput" accept="video/*">
+      
+      <button type="submit" class="btn btn-outline-primary" name="action" value="sr_video">确认超分</button>
+      
+    </form>
+    <hr>
+
+    {% if display %}
+    <div class="container1">
+      <h1>视频超分辨率结果</h1>
+      <h3>原始视频</h3>
+      <div class="video-container">
+        <video id="originalVideo" controls onloadstart="resizeVideo(this)">
+          <source src="{{ url_for('ai.uploaded_file', filename='origin_video') }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <h3>超分视频</h3>
+      <video width="320" height="240" controls>
+        <source src="{{ url_for('ai.uploaded_file', filename='chaofen_video') }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <script>
+      function resizeVideo(video) {
+        const shrinkFactor = 0.5; // 将视频大小减少到原始大小的50%
+        video.addEventListener('loadedmetadata', () => {
+          const originalWidth = video.videoWidth;
+          const originalHeight = video.videoHeight;
+          const newWidth = originalWidth * shrinkFactor;
+          const newHeight = originalHeight * shrinkFactor;
+          video.style.width = newWidth + 'px';
+          video.style.height = newHeight + 'px';
+        });
+      }
+    </script>
+    <style>
+      .video-container {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+      }
+    </style>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
