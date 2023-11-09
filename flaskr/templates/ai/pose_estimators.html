@@ -24,7 +24,7 @@
       <h5>选择算法</h5>
       <select class="btn btn-falcon-default dropdown-toggle" aria-label="Default select example" name="algo_option">
         <option value="human">human</option>
-        <option value="basicvsr">1</option>
+      
       </select>
       <p></p>
       <h5>选择文件</h5>
@@ -34,7 +34,13 @@
       <button type="submit" class="btn btn-outline-primary" name="action" value="sr_video">开始姿态估计</button>
       
     </form>
-    <hr>
+    <hr> 
+    
+    <video controls>
+      <source src="{{ url_for('ai.uploaded_file', user_id=g.user['id'], folder='pose_estimators', filename='origin_video.mp4') }}" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+
 
     {% if display %}
     <div class="container1">
@@ -42,13 +48,14 @@
       <h3>原始视频</h3>
       <div class="video-container">
         <video id="originalVideo" controls onloadstart="resizeVideo(this)">
-          <source src="{{ url_for('ai.uploaded_file', filename='origin_pose_video') }}" type="video/mp4">
+          <source src="{{ url_for('ai.uploaded_file', user_id=g.user['id'], folder='pose_estimators', filename='origin_video.mp4') }}" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
+
       <h3>姿态估计结果视频</h3>
       <video width="320" height="240" controls>
-        <source src="{{ url_for('ai.uploaded_file', filename='estimate_pose_video') }}" type="video/mp4">
+        <source src="{{ url_for('ai.uploaded_file', user_id=g.user['id'], folder='pose_estimators/visualizations', filename='origin_video.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>

@@ -35,6 +35,38 @@
 });
 
   </script>
+
+
+
+<style>
+  .img-comp-container {
+      position: relative;
+      height: 652px; /* 可根据实际需要调整 */
+      width: 652px; /* 可根据实际需要调整 */
+  }
+  
+  .img-comp-img {
+      position: absolute;
+      width: auto;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid #000;
+  }
+  
+  .img-comp-img img {
+      display: block;
+      max-width: none;
+      max-height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+  }
+  
+  .img-comp-overlay {
+      border-color: transparent;
+  }
+  </style>
+  
 {% endblock %}
 
 
@@ -79,15 +111,15 @@
 
     {% if display %}
     <h3>原图:</h3>
-    <img src="{{ url_for('ai.uploaded_file', filename='origin_image.jpg') }}" alt="Origin Image">
+    <img src="{{ url_for('ai.uploaded_file', user_id=g.user['id'], folder='super_image', filename='origin_image'+suffix) }}" alt="Origin Image">
     <h3>裁剪:</h3>
-    <img src="{{ url_for('ai.uploaded_file', filename='cropped_image.jpg') }}" alt="Cropped Image">
+    <img src="{{ url_for('ai.uploaded_file', user_id=g.user['id'], folder='super_image', filename='cropped_image'+suffix) }}" alt="Cropped Image">
     <h3>超分:</h3>
-    <img src="{{ url_for('ai.uploaded_file', filename='chaofen_image.jpg') }}" alt="Chaofen Image">
+    <img src="{{ url_for('ai.uploaded_file', user_id=g.user['id'], folder='super_image', filename='chaofen_image'+suffix) }}" alt="Chaofen Image">
     {% endif %}
 
   </div>
 </div>
 
-
+  
 {% endblock %}
